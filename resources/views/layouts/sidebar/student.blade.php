@@ -1,18 +1,8 @@
-<li>
-    <a href="{{ route('student.index') }}">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Quiz</span>
-    </a>
-    <a href="{{ route('student.index') }}">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Quiz Not Taken</span>
-    </a>
-    <a href="{{ route('student.index2') }}">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Quiz On Progress</span>
-    </a>
-    <a href="{{ route('student.index3') }}">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Quiz Taken</span>
-    </a>
-</li>
+<a href="/dashboard.html" class="list-group-item list-group-item-action ">Dashboard
+</a>
+<a href="/dashboard-products.html" class="list-group-item list-group-item-action">Materi
+</a>
+<a href="/dashboard-transactions.html" class="list-group-item list-group-item-action">Quiz
+</a>
+<a href="/dashboard-transactions.html" class="list-group-item list-group-item-action">Mahasiswa
+</a>

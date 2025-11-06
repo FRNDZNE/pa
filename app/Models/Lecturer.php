@@ -18,6 +18,6 @@ class Lecturer extends Model
 
     public function kelas()
     {
-        return $this->hasMany(Kelas::class);
+        return $this->hasOne(Kelas::class);
     }
 }

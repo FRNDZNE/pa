@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
-    protected $guarded = [];
     protected $table = 'kelas'; // Assuming the table name is 'kelas'
+    protected $guarded = [];
 
     public function lecturer()
     {

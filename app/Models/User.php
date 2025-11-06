@@ -51,11 +51,11 @@ class User extends Authenticatable
 
     public function lecturer()
     {
-        return $this->hasMany(Lecturer::class);
+        return $this->hasOne(Lecturer::class);
     }
 
     public function student()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasOne(Student::class);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Student;
 use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
@@ -45,15 +46,5 @@ class UserSeeder extends Seeder
             'lecture_number' => 'L12345',
         ]);
         
-
-        $student = User::create([
-            'role_id' => $role['student']->id,
-            'uuid' => (string) Str::uuid(),
-            'name' => 'Student',
-            'email' => 'student@example.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('12345'),
-            'remember_token' => Str::random(),
-        ]);
     }
 }

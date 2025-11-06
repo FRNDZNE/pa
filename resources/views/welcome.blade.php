@@ -3,81 +3,67 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>3124640052</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('/') }}assets/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-    <!-- App css -->
-
-    <link href="{{ asset('/') }}assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
-
-    <!-- icons -->
-    <link href="{{ asset('/') }}assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
+    <title>Sistem Assesmen</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('/') }}assets/images/favicon.ico" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="{{ asset('/') }}assets/style/main.css" rel="stylesheet" />
 </head>
 
-<body class="loading authentication-bg authentication-bg-pattern">
-
-    <div class="account-pages my-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-4">
-                    <div class="text-center">
-                        <a href="index.html">
-                            <img src="{{ asset('/') }}assets/images/logo-dark.png" alt="" height="22"
-                                class="mx-auto">
-                        </a>
-                        <p class="text-muted mt-2 mb-4">Responsive Admin Dashboard</p>
-
+<body>
+    <!-- Page Content -->
+    <div class="page-content page-auth">
+        <div class="section-store-auth" data-aos="fade-up">
+            <div class="container">
+                <div class="row align-items-center row-login">
+                    <div class="col-lg-6 text-center">
+                        <img src="{{ asset('/') }}assets/images/login_placeholder.png" alt="Login-Image"
+                            class="w-50 mb-4 mb-lg-none" />
                     </div>
-                    <div class="card">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-4">
-                                <h4 class="text-uppercase mt-0">Sign In</h4>
+                    <div class="col-lg-5">
+                        <h2>
+                            Selamat Datang <br />
+
+                        </h2>
+                        <form action="{{ route('login') }}" class="mt-3" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" id="email" class="form-control w-75" />
                             </div>
-                            <form action="{{ route('login') }}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
-                                    <input class="form-control" type="email" id="emailaddress" required=""
-                                        name="email" placeholder="Enter your email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input name="password" class="form-control" type="password" required=""
-                                        id="password" placeholder="Enter your password">
-                                </div>
-                                <div class="mb-3 d-grid text-center">
-                                    <button class="btn btn-primary" type="submit"> Log In </button>
-                                </div>
-                            </form>
-
-                        </div> <!-- end card-body -->
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" class="form-control w-75" />
+                            </div>
+                            <button class="btn btn-success btn-block w-75 mt-4">
+                                Sign In
+                            </button>
+                        </form>
                     </div>
-                </div> <!-- end col -->
+                </div>
             </div>
-            <!-- end row -->
         </div>
-        <!-- end container -->
     </div>
-    <!-- end page -->
-
-    <!-- Vendor -->
-    <script src="{{ asset('/') }}assets/libs/jquery/jquery.min.js"></script>
-    <script src="{{ asset('/') }}assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('/') }}assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="{{ asset('/') }}assets/libs/node-waves/waves.min.js"></script>
-    <script src="{{ asset('/') }}assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="{{ asset('/') }}assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
-    <script src="{{ asset('/') }}assets/libs/feather-icons/feather.min.js"></script>
-
-    <!-- App js -->
-    <script src="{{ asset('/') }}assets/js/app.min.js"></script>
-
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="pt-4 pb-2">Proyek Akhir</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('/') }}assets/vendor/jquery/jquery.slim.min.js"></script>
+    <script src="{{ asset('/') }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="{{ asset('/') }}assets/script/navbar-scroll.js"></script>
 </body>
 
 </html>

@@ -1,24 +1,8 @@
-<li>
-    <a href="apps-calendar.html">
-        <i class="mdi mdi-calendar-blank-outline"></i>
-        <span> Kelas </span>
-    </a>
-</li>
-<li>
-    <a href="apps-chat.html">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Mahasiswa </span>
-    </a>
-</li>
-<li>
-    <a href="apps-chat.html">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Materi </span>
-    </a>
-</li>
-<li>
-    <a href="apps-chat.html">
-        <i class="mdi mdi-forum-outline"></i>
-        <span> Bank Soal </span>
-    </a>
-</li>
+<a href="/dashboard.html" class="list-group-item list-group-item-action ">Dashboard
+</a>
+<a href="/dashboard-products.html" class="list-group-item list-group-item-action">Kelas
+</a>
+<a href="/dashboard-transactions.html" class="list-group-item list-group-item-action">Materi
+</a>
+<a href="/dashboard-transactions.html" class="list-group-item list-group-item-action">Bank Soal
+</a>
