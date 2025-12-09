@@ -32,11 +32,19 @@
                             @csrf
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control w-75" />
+                                <input type="email" name="email" id="email"
+                                    class="form-control w-75 @error('email') is-invalid @enderror" />
+                                @error('email')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control w-75" />
+                                <input type="password" name="password" id="password"
+                                    class="form-control w-75 @error('password') is-invalid @enderror" />
+                                @error('password')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button class="btn btn-success btn-block w-75 mt-4">
                                 Sign In

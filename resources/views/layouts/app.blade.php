@@ -1,104 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+<!--begin::Head-->
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('/') }}assets/images/favicon.ico" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
-    <link href="{{ asset('/') }}assets/style/main.css" rel="stylesheet" />
-    @livewireStyles
+    <!--begin::Accessibility Meta Tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <!--end::Accessibility Meta Tags-->
+    <!--begin::Primary Meta Tags-->
+    <meta name="title" content="Sistem Assesmen Pemrograman" />
+    <meta name="author" content="ColorlibHQ" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--end::Primary Meta Tags-->
+    <!--begin::Accessibility Features-->
+    <!-- Skip links will be dynamically added by accessibility.js -->
+    <meta name="supported-color-schemes" content="light dark" />
+    <link rel="preload" href="{{ asset('/') }}/assets-lte/css/adminlte.css" as="style" />
+    <!--end::Accessibility Features-->
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+        integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous" media="print"
+        onload="this.media='all'" />
+    <!--end::Fonts-->
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+        crossorigin="anonymous" />
+    <!--end::Third Party Plugin(OverlayScrollbars)-->
+    <!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        crossorigin="anonymous" />
+    <!--end::Third Party Plugin(Bootstrap Icons)-->
+    <!--begin::Required Plugin(AdminLTE)-->
+    <link rel="stylesheet" href="{{ asset('/') }}/assets-lte/css/adminlte.css" />
+    <!--end::Required Plugin(AdminLTE)-->
 </head>
+<!--end::Head-->
+<!--begin::Body-->
 
-<body>
-    <div class="page-dashboard">
-        <div class="d-flex" id="wrapper" data-aos="fade-right">
-            <!-- sidebar -->
-            <div class="border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading text-center">
-                    <img src="{{ asset('/') }}assets/images/logo-assesmen.svg" alt="logo" class="my-4" />
-                </div>
-                <div class="list-group list-group-flush">
-                    @if (Auth::user()->role->name == 'admin')
-                        @include('layouts.sidebar.admin')
-                    @elseif(Auth::user()->role->name == 'lecturer')
-                        @include('layouts.sidebar.lecturer')
-                    @elseif(Auth::user()->role->name == 'student')
-                        @include('layouts.sidebar.student')
-                    @endif
-                </div>
-            </div>
-
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <!-- Desktop Menu -->
-                            <ul class="navbar-nav d-none d-lg-flex ml-auto">
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link" id="navbarDropdown" role="button"
-                                        data-toggle="dropdown">
-                                        {{-- Image User Soon --}}
-                                        <img src="{{ asset('/') }}assets/images/user.png" alt="profile-icon"
-                                            class="rounded-circle mr-2 profile-picture" />
-                                        {{ Auth::user()->name }}
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a href="/dashboard.html" class="dropdown-item">Dashboard</a>
-                                        <a href="/dashboard-account.html" class="dropdown-item">Account</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                            class="dropdown-item">Logout</a>
-                                        <form action="{{ route('logout') }}" method="post" id="logout-form"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link d-inline-block">
-                                        <img src="{{ asset('/') }}assets/images/white-bell.svg" alt="icon-cart" />
-                                        <div class="card-badge">3</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                <!-- Section Content -->
-                <div class="section-content section-dsahboard-home" data-aos="fade-up">
-                    <div class="container-fluid">
-                        <div class="dashboard-heading">
-                            <h2 class="dashboard-title">@yield('title')</h2>
-                            <p class="dashboard-subtitle">@yield('page-subtitle')</p>
-                        </div>
-                        <div class="dashboard-content">
-                            @yield('content')
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body class="layout-fixed fixed-header fixed-footer sidebar-expand-lg sidebar-open bg-body-tertiary">
+    <!--begin::App Wrapper-->
+    <div class="app-wrapper">
+        <!--begin::Header-->
+        @include('layouts.partials.header')
+        <!--end::Header-->
+        <!--begin::Sidebar-->
+        @include('layouts.partials.sidebar')
+        <!--end::Sidebar-->
+        <!--begin::App Main-->
+        @include('layouts.partials.content')
+        <!--end::App Main-->
+        <!--begin::Footer-->
+        <footer class="app-footer">
+            <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline">Anything you want</div>
+            <!--end::To the end-->
+            <!--begin::Copyright-->
+            <strong>
+                Copyright &copy; 2014-2025&nbsp;
+                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+            </strong>
+            All rights reserved.
+            <!--end::Copyright-->
+        </footer>
+        <!--end::Footer-->
     </div>
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{ asset('/') }}assets/vendor/jquery/jquery.slim.min.js"></script>
-    <script src="{{ asset('/') }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
+    <!--end::App Wrapper-->
+    <!--begin::Script-->
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+        crossorigin="anonymous"></script>
+    <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
     </script>
-    <script src="{{ asset('/') }}assets/script/navbar-scroll.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    {{-- JQUERY --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
 
-    @livewireScripts
+    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="{{ asset('/') }}/assets-lte/js/adminlte.js"></script>
+    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+        const Default = {
+            scrollbarTheme: 'os-theme-light',
+            scrollbarAutoHide: 'leave',
+            scrollbarClickScroll: true,
+        };
+        $(document).ready(function() {
+            const sidebarWrapper = $(SELECTOR_SIDEBAR_WRAPPER)[0];
+            if (
+                sidebarWrapper &&
+                typeof OverlayScrollbarsGlobal !== "undefined" &&
+                typeof OverlayScrollbarsGlobal.OverlayScrollbars !== "undefined"
+            ) {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.scrollbarClickScroll,
+                    },
+                });
+            }
+        });
+    </script>
+    <!--end::OverlayScrollbars Configure-->
+    <!--end::Script-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                title: "Berhasil",
+                text: "{{ Session::get('success') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: "{{ Session::get('error') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
+    @stack('scripts')
 </body>
+<!--end::Body-->
 
 </html>
