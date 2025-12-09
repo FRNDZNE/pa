@@ -37,7 +37,10 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('/') }}/assets-lte/css/adminlte.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
+        integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0=" crossorigin="anonymous" />
     <!--end::Required Plugin(AdminLTE)-->
+    @livewireStyles
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -53,20 +56,10 @@
         <!--end::Sidebar-->
         <!--begin::App Main-->
         @include('layouts.partials.content')
+        @include('layouts.partials.footer')
         <!--end::App Main-->
         <!--begin::Footer-->
-        <footer class="app-footer">
-            <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
-            <!--end::To the end-->
-            <!--begin::Copyright-->
-            <strong>
-                Copyright &copy; 2014-2025&nbsp;
-                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
-        </footer>
+
         <!--end::Footer-->
     </div>
     <!--end::App Wrapper-->
@@ -130,7 +123,11 @@
             });
         </script>
     @endif
+    {{-- Chart from index 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
+        integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
     @stack('scripts')
+    @livewireScripts
 </body>
 <!--end::Body-->
 

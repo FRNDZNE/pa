@@ -13,7 +13,7 @@
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
             <!--begin::Messages Dropdown Menu-->
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown d-none ">
                 <a class="nav-link" data-bs-toggle="dropdown" href="#">
                     <i class="bi bi-bell-fill"></i>
                     <span class="navbar-badge badge text-bg-danger">3</span>
@@ -55,15 +55,35 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="{{ asset('/') }}/assets-lte/assets/img/user2-160x160.jpg"
-                        class="user-image rounded-circle shadow" alt="User Image" />
+                    @if (Auth::user()->role->name == 'admin')
+                        <img src="{{ asset('/') }}/assets-lte/assets/img/admin.png"
+                            class="user-image rounded-circle shadow" alt="User Image" />
+                    @endif
+                    @if (Auth::user()->role->name == 'lecturer')
+                        <img src="{{ asset('/') }}/assets-lte/assets/img/lecturer.png"
+                            class="user-image rounded-circle shadow" alt="User Image" />
+                    @endif
+                    @if (Auth::user()->role->name == 'student')
+                        <img src="{{ asset('/') }}/assets-lte/assets/img/student.png"
+                            class="user-image rounded-circle shadow" alt="User Image" />
+                    @endif
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <!--begin::User Image-->
-                    <li class="user-header text-bg-primary">
-                        <img src="{{ asset('/') }}/assets-lte/assets/img/user2-160x160.jpg"
-                            class="rounded-circle shadow" alt="User Image" />
+                    <li class="user-header text-bg-secondary">
+                        @if (Auth::user()->role->name == 'admin')
+                            <img src="{{ asset('/') }}/assets-lte/assets/img/admin.png" class="rounded-circle shadow"
+                                alt="User Image" />
+                        @endif
+                        @if (Auth::user()->role->name == 'lecturer')
+                            <img src="{{ asset('/') }}/assets-lte/assets/img/lecturer.png"
+                                class="rounded-circle shadow" alt="User Image" />
+                        @endif
+                        @if (Auth::user()->role->name == 'student')
+                            <img src="{{ asset('/') }}/assets-lte/assets/img/student.png"
+                                class="rounded-circle shadow" alt="User Image" />
+                        @endif
                         <p>
                             {{ Auth::user()->name }}
                         </p>
@@ -73,10 +93,10 @@
                     <!--end::Menu Body-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        <a href="#" class="btn btn-default btn-flat d-none">Profile</a>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                            class="btn btn-default btn-flat float-end">Sign out</a>
+                            class="btn btn-danger btn-flat float-end">Sign out</a>
                         <form action="{{ route('logout') }}" method="post" id="logout-form" class="d-none">
                             @csrf
                         </form>

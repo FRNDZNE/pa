@@ -37,6 +37,21 @@ Route::get('/home', function () {
     }
 })->middleware('auth')->name('home');
 
+Route::get('/home', function () {
+    if (Auth::user()->role->name == 'admin') {
+        return redirect()->route('admin.dashboard');
+    } elseif (Auth::user()->role->name == 'lecturer') {
+        return redirect()->route('lecturer.dashboard');
+    } elseif (Auth::user()->role->name == 'student') {
+        return redirect()->route('student.dashboard');
+    }
+})->middleware('auth')->name('home');
+
+Route::middleware('auth')->group(function(){
+    Route::get('/notifications',[NotificationController::class,'index'])->name("notifications.index");
+    Route::get('mark-read-all',[NotificationController::class,'markAsRead'])->name('markAll');
+    Route::get('mark-read-by-id/{id}',[NotificationController::class,'markAsReadById'])->name('markId');
+});
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
