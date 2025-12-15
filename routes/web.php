@@ -62,7 +62,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     });
 
     Route::prefix('data-kelas')->group(function () {
-        Route::get('/', [KelasController::class, 'index'])->name('admin.class.index');
+        Route::get('/', [KelasController::class, 'index'])->name('admin.kelas.index');
     });
 
     Route::prefix('data-mahasiswa')->group(function () {
@@ -75,7 +75,7 @@ Route::prefix('lecturer')->middleware(['auth', 'role:lecturer'])->group(function
     Route::get('/dashboard', [DashboardController::class, 'lecturer'])->name('lecturer.dashboard');
 
     Route::prefix('data-kelas')->group(function () {
-        Route::get('/', [KelasController::class, 'index'])->name('lecturer.class.index');
+        Route::get('/', [KelasController::class, 'index'])->name('lecturer.kelas.index');
     });
 
     Route::prefix('data-mahasiswa')->group(function () {

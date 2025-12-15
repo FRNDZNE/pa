@@ -1,10 +1,3 @@
-<li class="nav-header">Dashboard</li>
-<li class="nav-item">
-    <a href="{{ route('home') }}" class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
-        <i class="nav-icon bi bi-speedometer2"></i>
-        <p>Dashboard</p>
-    </a>
-</li>
 <li class="nav-header">Master</li>
 <li class="nav-item">
     <a href="{{ route('admin.dosen.index') }}" class="nav-link {{ Route::is('admin.dosen.index') ? 'active' : '' }}">
@@ -13,13 +6,14 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="" class="nav-link">
+    <a href="{{ route('admin.kelas.index') }}" class="nav-link {{ Route::is('admin.kelas.index') ? 'active' : '' }}">
         <i class="nav-icon bi bi-people"></i>
         <p>Kelas</p>
     </a>
 </li>
 <li class="nav-item">
-    <a href="" class="nav-link">
+    <a href="{{ route('admin.student.index') }}"
+        class="nav-link {{ Route::is('admin.student.index') ? 'active' : '' }}">
         <i class="nav-icon bi bi-mortarboard"></i>
         <p>Mahasiswa</p>
     </a>

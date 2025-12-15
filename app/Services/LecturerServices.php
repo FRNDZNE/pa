@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
-class AdminLecturerServices
+class LecturerServices
 {
     public function getLecturer()
     {
@@ -83,17 +83,6 @@ class AdminLecturerServices
             return $data;
         });
     }
-
-    public function exportData()
-    {
-        
-    }
-
-    public function importData()
-    {
-    }
-    
-    
 }
 
 ?>

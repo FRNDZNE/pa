@@ -20,6 +20,13 @@
             <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
+                <li class="nav-header">Dashboard</li>
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link {{ Route::is('*.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-speedometer2"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
                 @if (Auth::user()->role->name == 'admin')
                     @include('layouts.partials.sidebar.admin')
                 @elseif(Auth::user()->role->name == 'lecturer')

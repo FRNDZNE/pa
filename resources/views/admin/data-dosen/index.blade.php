@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Data Dosen')
 @section('breadcumb')
-    <li class="breadcrumb-item"><a href="#">{{ ucwords(Auth::user()->role->name) }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ ucwords(Auth::user()->role->name) }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Data Dosen</li>
 @endsection
 @section('content')
@@ -15,3 +15,5 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+@endpush

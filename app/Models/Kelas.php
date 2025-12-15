@@ -25,4 +25,9 @@ class Kelas extends Model
     {
         return $this->hasMany(Lesson::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }

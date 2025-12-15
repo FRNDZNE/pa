@@ -1,19 +1,14 @@
-<li class="nav-header">Dashboard</li>
-<li class="nav-item">
-    <a href="" class="nav-link {{ Route::is('lecturer.dashboard') ? 'active' : '' }}">
-        <i class="nav-icon bi bi-speedometer2"></i>
-        <p>Dashboard</p>
-    </a>
-</li>
 <li class="nav-header">Master</li>
 <li class="nav-item">
-    <a href="" class="nav-link">
+    <a href="{{ route('lecturer.kelas.index') }}"
+        class="nav-link {{ Route::is('lecturer.kelas.index') ? 'active' : '' }}">
         <i class="nav-icon bi bi-people"></i>
         <p>Kelas</p>
     </a>
 </li>
 <li class="nav-item">
-    <a href="" class="nav-link">
+    <a href="{{ route('lecturer.student.index') }}"
+        class="nav-link {{ Route::is('lecturer.student.index') ? 'active' : '' }}">
         <i class="nav-icon bi bi-mortarboard"></i>
         <p>Mahasiswa</p>
     </a>

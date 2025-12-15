@@ -1,3 +1,5 @@
 <div>
-    {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
+    <form action="" method="post">
+
+    </form>
 </div>

@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\KelasServices;
-use App\Services\AdminLecturerServices;
+use App\Services\LecturerServices;
 use Auth;
 
 
 class KelasController extends Controller
 {
-    public function __construct(KelasServices $kelas, AdminLecturerServices $lecturer)
+    public function __construct(KelasServices $kelas, LecturerServices $lecturer)
     {
         $this->kelas = $kelas;
         $this->lecturer = $lecturer;
@@ -18,10 +18,7 @@ class KelasController extends Controller
 
     public function index()
     {
-        $role = Auth::user()->role->name;
-        $data['kelas'] = $this->kelas->getKelas($role);
-        $data['lecturers'] = $this->lecturer->getLecture();
-        return view("{$role}.data-kelas.index", compact('data'));
+        return view("data-kelas.index");
     }
 
     public function store(Request $request)
