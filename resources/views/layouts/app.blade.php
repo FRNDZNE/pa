@@ -128,6 +128,8 @@
 
     @stack('scripts')
     @livewireScripts
+    <script src="{{ asset('js/livewire-modals.js') }}"></script>
+
 </body>
 
 </html>

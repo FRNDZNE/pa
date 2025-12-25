@@ -9,18 +9,17 @@ class Index extends Component
 {
     public $lecturer;
     public $listeners = [
-        'loadData' => 'refreshData'
+        'loadData' => 'data',
     ];
     
-    public function refreshData()
+    public function data()
     {
         $service = new LecturerServices();
         $this->lecturer = $service->getLecturer();
     }
     public function mount()
     {
-        $service = new LecturerServices();
-        $this->lecturer = $service->getLecturer();
+        $this->data();
     }
     public function render()
     {

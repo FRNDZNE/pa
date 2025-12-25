@@ -59,6 +59,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::prefix('data-dosen')->group(function () {
         Route::get('/', [LecturerController::class, 'index'])->name('admin.dosen.index');
+        Route::post('/store', [LecturerController::class, 'store'])->name('admin.dosen.store');
+        Route::patch('/update/{uuid}', [LecturerController::class, 'update'])->name('admin.dosen.update');
+        Route::delete('delete/{uuid}', [LecturerController::class,'destroy'])->name('admin.dosen.destroy');
     });
 
     Route::prefix('data-kelas')->group(function () {

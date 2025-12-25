@@ -1,5 +1,6 @@
 <div>
     <div class="table-responsive">
+
         <table class="table table-default" id="lecturerTable">
             <thead>
                 <tr>

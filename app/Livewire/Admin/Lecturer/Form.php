@@ -11,12 +11,12 @@ class Form extends Component
     public $email;
     public $lecture_number;
 
-    public function stored()
+    public function store()
     {
 
     }
 
-    public function updated()
+    public function update()
     {
         
     }
