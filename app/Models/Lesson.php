@@ -32,5 +32,10 @@ class Lesson extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
 
 }

@@ -1,6 +1,7 @@
 <li class="nav-header">Master</li>
 <li class="nav-item">
-    <a href="{{ route('admin.dosen.index') }}" class="nav-link {{ Route::is('admin.dosen.index') ? 'active' : '' }}">
+    <a href="{{ route('admin.lecturer.index') }}"
+        class="nav-link {{ Route::is('admin.lecturer.index') ? 'active' : '' }}">
         <i class="nav-icon bi bi-person-badge"></i>
         <p>Dosen</p>
     </a>
