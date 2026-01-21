@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $data['kelas'] = Kelas::count();
         $data['materi'] = Material::count();
         $data['quiz'] = Question::count();
-        return view('admin.dashboard', compact('data'));
+        return view('dashboard.admin', compact('data'));
     }
 
     public function lecturer()
@@ -25,12 +25,12 @@ class DashboardController extends Controller
         $data['kelas'] = Kelas::count();
         $data['materi'] = Material::count();
         $data['quiz'] = Question::count();
-        return view('lecturer.dashboard', compact('data'));
+        return view('dashboard.lecturer', compact('data'));
     }
 
     public function student()
     {
         $data['materi'] = Material::count();
-        return view('student.dashboard', compact('data'));
+        return view('dashboard.student', compact('data'));
     }
 }

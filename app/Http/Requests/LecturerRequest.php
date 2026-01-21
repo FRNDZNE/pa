@@ -21,19 +21,22 @@ class LecturerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $isPatch = $this->isMethod('PATCH');
         return [
             'lecture_number' => 'required|unique:lecturers,lecture_number,' . $this->lecturer?->id,
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->user?->id,
+            'password' => $isPatch ? 'sometimes|min:8' : 'required|min:8',
         ];
     }
 
     public function attributes() : array
     {
         return [
-            'name' => 'Tanggal',
-            'lecture' => 'Aktivitas',
-            'output' => 'Hasil',
+            'name' => 'Nama',
+            'email' => 'E-Mail',
+            'lecture_number' => 'NIDN Dosen',
+            'password' => 'Kata Sandi',
         ];
     }
 
@@ -41,6 +44,9 @@ class LecturerRequest extends FormRequest
     {
         return [
             'required' => ':attribute Tidak Boleh Kosong',
+            'unique' => ':attribute Sudah Digunakan',
+            'email' => ':attribute Harus Berupa Email yang Valid',
+            'min' => ':attribute Minimal :min Karakter',
         ];
     }
 }

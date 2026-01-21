@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Admin\LecturerController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\StudentQuizController;
+use App\Http\Controllers\LecturerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
+
 
 /*
 |--------------------------------------------------------------------------

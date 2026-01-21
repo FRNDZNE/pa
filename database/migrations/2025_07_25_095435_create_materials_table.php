@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->string('material_path');
+            $table->enum('difficulty', ['mudah', 'sedang', 'sulit'])->default('mudah');
             $table->timestamps();
         });
     }

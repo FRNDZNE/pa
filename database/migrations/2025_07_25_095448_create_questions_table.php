@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->foreignId('material_id')->constrained('materials')->onDelete('cascade');
             $table->string('question_text');
-            $table->enum('difficulty', ['mudah', 'sedang', 'sulit'])->default('mudah');
             $table->timestamps();
         });
     }
