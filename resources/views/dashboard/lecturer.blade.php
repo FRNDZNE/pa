@@ -6,18 +6,7 @@
 @endsection
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-                <span class="info-box-icon text-bg-primary shadow-sm">
-                    <i class="bi bi-people"></i>
-                </span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Dosen</span>
-                    <span class="info-box-number">{{ $data['dosen'] }} <small>Dosen</small></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box">
                 <span class="info-box-icon text-bg-success shadow-sm">
                     <i class="bi bi-building"></i>
@@ -28,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box">
                 <span class="info-box-icon text-bg-info shadow-sm">
                     <i class="bi bi-journal-text"></i>
@@ -39,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-4">
             <div class="info-box">
                 <span class="info-box-icon text-bg-warning shadow-sm">
                     <i class="bi bi-clipboard-check"></i>

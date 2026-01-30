@@ -18,8 +18,6 @@ return new class extends Migration
             $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->integer('score')->default(0);
             $table->enum('grade', ['A', 'B', 'C', 'D', 'F'])->default('F');
-            $table->timestamp('started_at')->nullable();
-            $table->timestamp('finished_at')->nullable();
             $table->boolean('is_passed')->default(false);
             $table->timestamps();
         });

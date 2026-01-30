@@ -46,7 +46,7 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
-    @livewireStyles
+    {{-- @livewireStyles --}}
 </head>
 <!--end::Head-->
 
@@ -127,8 +127,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     @stack('scripts')
-    @livewireScripts
-    <script src="{{ asset('js/livewire-modals.js') }}"></script>
+    {{-- @livewireScripts --}}
 
 </body>
 
