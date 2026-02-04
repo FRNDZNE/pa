@@ -57,26 +57,27 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('data-dosen')->group(function () {
         Route::get('/', [LecturerController::class, 'index'])->name('lecturer.index');
         Route::post('/store', [LecturerController::class, 'store'])->name('lecturer.store');
+        Route::post('/upload', [LecturerController::class, 'upload'])->name('lecturer.upload');
         Route::patch('/update/{user:uuid}', [LecturerController::class, 'update'])->name('lecturer.update');
         Route::delete('/delete/{user:uuid}', [LecturerController::class,'destroy'])->name('lecturer.destroy');
     });
 
-    Route::prefix('data-kelas')->group(function () {
-        Route::get('/', [KelasController::class, 'index'])->name('kelas.index');
-        Route::post('/store', [KelasController::class, 'store'])->name('kelas.store');
-        Route::patch('/update/{kelas:uuid}', [KelasController::class, 'update'])->name('kelas.update');
-        Route::delete('/delete/{kelas:uuid}', [KelasController::class,'destroy'])->name('kelas.destroy');
+    Route::prefix('data-mahasiswa')->group(function () {
+        Route::get('/', [StudentController::class, 'index'])->name('student.index');
+        Route::post('/store', [StudentController::class, 'store'])->name('student.store');
+        Route::post('/upload', [StudentController::class, 'upload'])->name('student.upload');
+        Route::patch('/update/{user:uuid}', [StudentController::class, 'update'])->name('student.update');
+        Route::delete('/delete/{user:uuid}', [StudentController::class,'destroy'])->name('student.destroy');
+    });
+
+    Route::prefix('lessons')->group(function () {
+        
     });
 });
 
 Route::prefix('lecturer')->middleware(['auth', 'role:lecturer'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'lecturer'])->name('lecturer.dashboard');
-    Route::prefix('data-kelas')->group(function () {
-        Route::get('/', [KelasController::class, 'index'])->name('lecturer.kelas.index');
-    });
-    Route::prefix('data-mahasiswa')->group(function () {
-        Route::get('/', [StudentController::class, 'index'])->name('lecturer.student.index');
-    });
+    
 });
 
 Route::prefix('student')->middleware(['auth', 'role:student'])->group(function () {

@@ -15,9 +15,4 @@ class Lecturer extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function kelas()
-    {
-        return $this->hasOne(Kelas::class);
-    }
 }

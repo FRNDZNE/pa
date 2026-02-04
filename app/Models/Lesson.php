@@ -12,11 +12,6 @@ class Lesson extends Model
     protected $table = 'lessons';
     protected $guarded = [];
 
-
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class);
-    }
     public function materials()
     {
         return $this->hasMany(Material::class);

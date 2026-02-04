@@ -11,22 +11,17 @@ class Student extends Model
     protected $table = 'students'; // Assuming the table name is 'students'
     protected $guarded = [];
 
-    public function kelas()
-    {
-        return $this->belongsTo(Kelas::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function StudentAnswers()
+    public function studentAnswer()
     {
         return $this->hasMany(StudentAnswer::class);
     }
 
-    public function studentScores()
+    public function studentScore()
     {
         return $this->hasMany(StudentScore::class);
     }

@@ -20,11 +20,11 @@
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
                 <span class="info-box-icon text-bg-success shadow-sm">
-                    <i class="bi bi-building"></i>
+                    <i class="bi bi-people"></i>
                 </span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Kelas</span>
-                    <span class="info-box-number">{{ $data['kelas'] }} <small>Kelas</small></span>
+                    <span class="info-box-text">Mahasiswa</span>
+                    <span class="info-box-number">{{ $data['student'] }} <small>Mahasiswa</small></span>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">Materi</span>
-                    <span class="info-box-number">{{ $data['materi'] }} <small>File</small></span>
+                    <span class="info-box-number">{{ $data['lesson'] }} <small>File</small></span>
                 </div>
             </div>
         </div>

@@ -6,9 +6,9 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('kelas.index') }}" class="nav-link {{ Route::is('kelas.index') ? 'active' : '' }}">
-        <i class="nav-icon bi bi-easel"></i>
-        <p>Kelas</p>
+    <a href="{{ route('student.index') }}" class="nav-link {{ Route::is('student.index') ? 'active' : '' }}">
+        <i class="nav-icon bi bi-person-badge"></i>
+        <p>Mahasiswa</p>
     </a>
 </li>
 <li class="nav-header">Materi dan Soal</li>
@@ -16,11 +16,5 @@
     <a href="" class="nav-link">
         <i class="nav-icon bi bi-journal-bookmark"></i>
         <p>Materi</p>
-    </a>
-</li>
-<li class="nav-item">
-    <a href="" class="nav-link ">
-        <i class="nav-icon bi bi-collection"></i>
-        <p>Bank Soal</p>
     </a>
 </li>
