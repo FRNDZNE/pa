@@ -25,4 +25,9 @@ class Student extends Model
     {
         return $this->hasMany(StudentScore::class);
     }
+
+    public function studentDifficultyScores()
+    {
+        return $this->hasMany(StudentDifficultyScore::class);
+    }
 }

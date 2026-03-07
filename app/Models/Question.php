@@ -14,4 +14,14 @@ class Question extends Model
     {
         return 'uuid';
     }
+
+    public function answers()
+    {
+        return $this->hasMany(QuestionAnswer::class);
+    }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }

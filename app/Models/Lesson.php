@@ -12,6 +12,11 @@ class Lesson extends Model
     protected $table = 'lessons';
     protected $guarded = [];
 
+    public function lecturer()
+    {
+        return $this->belongsTo(Lecturer::class);
+    }
+    
     public function materials()
     {
         return $this->hasMany(Material::class);
@@ -22,9 +27,14 @@ class Lesson extends Model
         return $this->hasMany(StudentScore::class);
     }
 
+    public function studentDifficultyScores()
+    {
+        return $this->hasMany(StudentDifficultyScore::class);
+    }
+
     public function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasManyThrough(Question::class, Material::class);
     }
 
     public function getRouteKeyName()
