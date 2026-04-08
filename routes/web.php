@@ -57,15 +57,15 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('data-dosen')->group(function () {
         Route::get('/', [LecturerController::class, 'index'])->name('lecturer.index');
         Route::post('/store', [LecturerController::class, 'store'])->name('lecturer.store');
-        Route::patch('/update/{uuid}', [LecturerController::class, 'update'])->name('lecturer.update');
-        Route::delete('/delete/{uuid}', [LecturerController::class,'destroy'])->name('lecturer.destroy');
+        Route::patch('/update/{user}', [LecturerController::class, 'update'])->name('lecturer.update');
+        Route::delete('/delete/{user}', [LecturerController::class,'destroy'])->name('lecturer.destroy');
     });
 
     Route::prefix('data-mahasiswa')->group(function () {
         Route::get('/', [StudentController::class, 'index'])->name('student.index');
         Route::post('/store', [StudentController::class, 'store'])->name('student.store');
-        Route::patch('/update/{uuid}', [StudentController::class, 'update'])->name('student.update');
-        Route::delete('/delete/{uuid}', [StudentController::class,'destroy'])->name('student.destroy');
+        Route::patch('/update/{user}', [StudentController::class, 'update'])->name('student.update');
+        Route::delete('/delete/{user}', [StudentController::class,'destroy'])->name('student.destroy');
     }); 
 });
 
