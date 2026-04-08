@@ -82,7 +82,7 @@
                             @endphp
                             <div
                                 class="p-2 border rounded {{ $isCorrect ? 'border-success text-success bg-white' : 'border-danger text-danger bg-white' }}">
-                                {{ $ansText }}
+                                {!! preg_replace('/`([^`]+)`/', '<code>$1</code>', e($ansText)) !!}
                             </div>
                         @else
                             <div class="p-2 border rounded border-secondary text-secondary bg-white">
@@ -96,7 +96,7 @@
                             $correctAnswer = $item['answers']->where('is_correct', true)->first();
                         @endphp
                         <div class="p-2 border rounded border-success text-success bg-white fw-semibold">
-                            {{ $correctAnswer ? $correctAnswer->answer_text : 'Tidak ada' }}
+                            {!! $correctAnswer ? preg_replace('/`([^`]+)`/', '<code>$1</code>', e($correctAnswer->answer_text)) : 'Tidak ada' !!}
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <li class="nav-header">QUIZ</li>
 <li class="nav-item">
-    <a href="{{ route('student.quiz.index') }}" class="nav-link {{ Route::is('quiz.*') ? 'active' : '' }}">
+    <a href="{{ route('student.quiz.index') }}" class="nav-link {{ Route::is('student.quiz.*') ? 'active' : '' }}">
         <i class="nav-icon bi bi-lightbulb"></i>
         <p>Quiz</p>
     </a>

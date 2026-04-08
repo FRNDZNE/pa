@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->foreignId('lesson_id')->constrained('lessons')->onDelete('cascade');
             $table->integer('score')->default(0);
-            $table->enum('grade', ['A', 'B', 'C', 'D', 'F'])->default('F');
+            $table->enum('grade', ['A', 'B', 'C', 'D', 'E'])->default('E');
             $table->boolean('is_passed')->default(false);
             $table->timestamps();
         });

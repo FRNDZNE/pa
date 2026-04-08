@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('uuid')->nullable()->unique();
             $table->foreignId('material_id')->constrained('materials')->onDelete('cascade');
+            $table->enum('type',['teori','solving'])->default('teori');
             $table->string('question_text');
             $table->timestamps();
         });

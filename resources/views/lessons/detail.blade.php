@@ -113,8 +113,8 @@
                         <div class="mb-4">
                             <p class="fw-semibold mb-1">
                                 {{ $loop->iteration }}.
-                                <span class="badge bg-{{ $type === 'problem_solving' ? 'info' : 'secondary' }} me-1">
-                                    {{ $type === 'problem_solving' ? '💻 Problem Solving' : '📖 Teori' }}
+                                <span class="badge bg-{{ $type === 'solving' ? 'info' : 'secondary' }} me-1">
+                                    {{ $type === 'solving' ? '💻 Problem Solving' : '📖 Teori' }}
                                 </span>
                                 <span class="badge bg-{{ $badgeColor }}">{{ $diff }}</span>
                             </p>
@@ -122,7 +122,7 @@
                             <ul class="list-unstyled ms-3">
                                 @foreach ($item['answers'] as $ans)
                                     <li class="{{ $ans->is_correct ? 'text-success fw-bold' : '' }}">
-                                        {{ $ans->answer_text }}
+                                        {!! preg_replace('/`([^`]+)`/', '<code>$1</code>', e($ans->answer_text)) !!}
                                     </li>
                                 @endforeach
                             </ul>
@@ -193,6 +193,17 @@
                     });
             }
 
+            // ── Helper escape HTML ─────────────────────────────────────────
+            function escapeHtml(text) {
+                if (!text) return '';
+                return text
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            }
+
             // ── Submit via AJAX ───────────────────────────────────────────
             $('#btnGenerate').on('click', function() {
                 let formData = new FormData($('#generateQuestion')[0]);
@@ -231,7 +242,7 @@
                                 sulit: 'danger',
                             } [difficulty] || 'secondary';
 
-                            let typeBadge = type === 'problem_solving' ?
+                            let typeBadge = type === 'solving' || type === 'problem_solving' ?
                                 '<span class="badge bg-info me-1">💻 Problem Solving</span>' :
                                 '<span class="badge bg-secondary me-1">📖 Teori</span>';
 
@@ -250,7 +261,7 @@
                                 let correct = ans.is_correct ?
                                     'text-success fw-bold' : '';
                                 html +=
-                                    `<li class="${correct}">${ans.answer_text}</li>`;
+                                    `<li class="${correct}">${escapeHtml(ans.answer_text).replace(/`([^`]+)`/g, '<code>$1</code>')}</li>`;
                             });
 
                             html += `</ul></div>`;

@@ -35,7 +35,7 @@
                 </span>
                 <div class="info-box-content">
                     <span class="info-box-text">Materi</span>
-                    <span class="info-box-number">{{ $data['lesson'] }} <small>File</small></span>
+                    <span class="info-box-number">{{ $data['lesson'] }} <small>Materi</small></span>
                 </div>
             </div>
         </div>

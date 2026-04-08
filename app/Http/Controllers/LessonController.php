@@ -103,11 +103,20 @@ class LessonController extends Controller
                 // Simpan file
                 $path = $file->store('materials', 'public');
 
-                // Baca konten (hanya untuk .txt)
+                // Baca konten (hanya untuk .txt) atau Upload PDF
                 $ext     = strtolower($file->getClientOriginalExtension());
                 $content = '';
+                $fileUri = null;
+                $mimeType = $file->getMimeType();
+
                 if ($ext === 'txt') {
                     $content = mb_substr(file_get_contents(storage_path('app/public/' . $path)), 0, 4000);
+                } else if ($ext === 'pdf') {
+                    // Upload ke Gemini via Service
+                    $serviceUpload = new \App\Services\GeminiFileService();
+                    // get file.uri from response API
+                    $uploadRes = $serviceUpload->uploadFile(storage_path('app/public/' . $path), $mimeType);
+                    $fileUri = $uploadRes['file']['uri'] ?? null;
                 }
 
                 // Simpan record Material
@@ -121,6 +130,8 @@ class LessonController extends Controller
                     $distributions[] = [
                         'material'   => $material,
                         'content'    => $content,
+                        'fileUri'    => $fileUri,
+                        'mimeType'   => $mimeType,
                         'difficulty' => $difficulty,
                         'jumlah'     => $jumlah,
                     ];
@@ -137,8 +148,8 @@ class LessonController extends Controller
             $allContent = implode("\n\n---\n\n", array_filter(array_column($distributions, 'content')));
 
             $konteksMaterial = $allContent
-                ? "Berikut isi materi yang diunggah:\n\"\"\"\n{$allContent}\n\"\"\"\n\n"
-                : "Topik materi: \"{$lesson->title}\".\n\n";
+                ? "Berikut isi materi yang diunggah (teks txt):\n\"\"\"\n{$allContent}\n\"\"\"\n\n"
+                : "Topik materi: \"{$lesson->title}\". (Atau baca langsung file dokumen yang dilampirkan jika ada).\n\n";
 
             $prompt = $konteksMaterial
                 . "Buatkan total {$totalSoal} soal pilihan ganda dalam Bahasa Indonesia "
@@ -163,15 +174,28 @@ class LessonController extends Controller
             $model  = 'gemini-2.5-flash';
             $url    = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent";
 
+            $parts = [];
+            // Jika ada file dokumen PDF yang berhasil diupload ke File API, masukkan fileUri
+            foreach ($distributions as $d) {
+                if (!empty($d['fileUri'])) {
+                    $parts[] = [
+                        'fileData' => [
+                            'mimeType' => $d['mimeType'],
+                            'fileUri'  => $d['fileUri'],
+                        ]
+                    ];
+                }
+            }
+            // Tambahkan text prompt di bagian akhir parts
+            $parts[] = ['text' => $prompt];
+
             $response = \Illuminate\Support\Facades\Http::withHeaders([
                 'x-goog-api-key' => $apiKey,
                 'Content-Type'   => 'application/json',
             ])->timeout(120)->post($url, [
                 'contents' => [
                     [
-                        'parts' => [
-                            ['text' => $prompt],
-                        ],
+                        'parts' => $parts,
                     ],
                 ],
             ]);
@@ -220,6 +244,7 @@ class LessonController extends Controller
                 $question = \App\Models\Question::create([
                     'uuid'          => \Illuminate\Support\Str::uuid(),
                     'material_id'   => $mat->id,
+                    'type'          => (isset($q['type']) && $q['type'] === 'problem_solving') ? 'solving' : 'teori',
                     'question_text' => $q['question'] ?? '',
                 ]);
 

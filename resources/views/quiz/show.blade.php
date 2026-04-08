@@ -86,7 +86,7 @@
                                                     <label
                                                         class="form-check-label w-100 cursor-pointer p-2 rounded hover-bg-light"
                                                         for="ans_{{ $ans->id }}">
-                                                        {{ $ans->answer_text }}
+                                                        {!! preg_replace('/`([^`]+)`/', '<code>$1</code>', e($ans->answer_text)) !!}
                                                     </label>
                                                 </div>
                                             @endforeach

@@ -36,6 +36,13 @@ class LessonServices {
 
     public static function deleteData(Lesson $lesson)
     {
+        // Delete related materials files
+        foreach ($lesson->materials as $material) {
+            if ($material->material_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($material->material_path)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($material->material_path);
+            }
+        }
+
         $lesson->delete();
         return $lesson;
     }

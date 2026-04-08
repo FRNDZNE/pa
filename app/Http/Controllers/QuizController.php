@@ -151,13 +151,14 @@ class QuizController extends Controller
                 : 0;
 
             $grade = match (true) {
-                $overallScore >= 85 => 'A',
-                $overallScore >= 70 => 'B',
-                $overallScore >= 55 => 'C',
-                $overallScore >= 40 => 'D',
-                default             => 'F',
+                $overallScore > 90 => 'A',
+                $overallScore > 70 => 'B',
+                $overallScore > 50 => 'C',
+                $overallScore > 40 => 'D',
+                default             => 'E',
             };
 
+            // Rule Based
             StudentScore::updateOrCreate(
                 [
                     'student_id' => $student->id,
@@ -166,7 +167,7 @@ class QuizController extends Controller
                 [
                     'score'     => $overallScore,
                     'grade'     => $grade,
-                    'is_passed' => $overallScore >= 55,
+                    'is_passed' => $overallScore >= 50,
                 ]
             );
         });
