@@ -84,28 +84,32 @@ class QuizController extends Controller
 
         $submittedAnswers = $request->input('answers'); // [question_id => answer_id]
 
-        DB::transaction(function () use ($student, $lesson, $submittedAnswers) {
+        // [OPTIMASI RULE-BASED] Hindari N+1 Query: Tarik data pertanyaan, material, dan opsi kunci jawaban sekaligus
+        $questionIds = array_keys($submittedAnswers);
+        $questions = Question::with(['material', 'answers'])->whereIn('id', $questionIds)->get()->keyBy('id');
 
-            // ── 1. Simpan student_answers & hitung skor per difficulty ────
+        DB::transaction(function () use ($student, $lesson, $submittedAnswers, $questions) {
+
+            // ── 1. Simpan student_answers & logika komparasi Poin (Scoring Rule-Based) ────
             $difficultyStats = []; // ['mudah' => ['total' => 0, 'correct' => 0], ...]
             $totalCorrect = 0;
             $totalQuestions = 0;
 
             foreach ($submittedAnswers as $questionId => $answerId) {
-                // Simpan jawaban student
+                // Catat aktivitas kebenaran rekam jejak
                 StudentAnswer::create([
                     'question_id' => $questionId,
                     'answer_id'   => $answerId,
                     'student_id'  => $student->id,
                 ]);
 
-                // Ambil question beserta material untuk tahu difficulty
-                $question = Question::with('material')->find($questionId);
+                // Ambil info pertanyaan dari memori Collection
+                $question = $questions->get($questionId);
                 if (!$question) continue;
 
                 $difficulty = $question->material->difficulty ?? 'mudah';
 
-                // Inisialisasi stats per difficulty
+                // Inisialisasi stats per tingkat kesulitan
                 if (!isset($difficultyStats[$difficulty])) {
                     $difficultyStats[$difficulty] = ['total' => 0, 'correct' => 0];
                 }
@@ -113,15 +117,14 @@ class QuizController extends Controller
                 $difficultyStats[$difficulty]['total']++;
                 $totalQuestions++;
 
-                // Cek apakah jawaban benar
-                $isCorrect = $question->answers()
-                    ->where('id', $answerId)
-                    ->where('is_correct', true)
-                    ->exists();
+                // [RULE-BASED SCORING: Poin = 1 jika Sama, = 0 jika Beda]
+                // Validasi dilakukan secara komputasi *array* tanpa perlu query sql dalam *looping*
+                $answerModel = $question->answers->where('id', $answerId)->first();
+                $isCorrect = $answerModel && $answerModel->is_correct;
 
                 if ($isCorrect) {
                     $difficultyStats[$difficulty]['correct']++;
-                    $totalCorrect++;
+                    $totalCorrect++; // Tambah Poin +1 Parameter
                 }
             }
 
@@ -192,25 +195,55 @@ class QuizController extends Controller
             ->get()
             ->keyBy('difficulty');
 
-        // Ambil detail jawaban student
-        $questions = $lesson->materials()
-            ->with(['questions.answers'])
+        // Ambil semua materi beserta soal dan opsi jawabannya
+        $materials = $lesson->materials()->with(['questions.answers'])->get();
+        $questionIds = $materials->flatMap->questions->pluck('id');
+        
+        // Ambil riwayat seluruh jawaban student di quiz ini secara bulk (hindari N+1 query)
+        $studentAnswers = StudentAnswer::where('student_id', $student->id)
+            ->whereIn('question_id', $questionIds)
             ->get()
-            ->flatMap(function ($material) use ($student) {
-                return $material->questions->map(function ($question) use ($material, $student) {
-                    $studentAnswer = StudentAnswer::where('student_id', $student->id)
-                        ->where('question_id', $question->id)
-                        ->first();
+            ->keyBy('question_id');
 
-                    return [
-                        'question'       => $question,
-                        'answers'        => $question->answers,
-                        'difficulty'     => $material->difficulty,
-                        'student_answer' => $studentAnswer,
-                    ];
-                });
-            });
+        $questions = collect();
+        $adaptiveFeedbacks = [];
 
-        return view('quiz.result', compact('lesson', 'overallScore', 'difficultyScores', 'questions'));
+        foreach ($materials as $material) {
+            $materialQuestions = $material->questions;
+            $materialTotal = $materialQuestions->count();
+            $materialCorrect = 0;
+
+            foreach ($materialQuestions as $question) {
+                $studentAnswer = $studentAnswers->get($question->id);
+                
+                $isCorrect = false;
+                if ($studentAnswer) {
+                    $answerModel = $question->answers->where('id', $studentAnswer->answer_id)->first();
+                    if ($answerModel && $answerModel->is_correct) {
+                        $isCorrect = true;
+                        $materialCorrect++;
+                    }
+                }
+
+                $questions->push([
+                    'question'       => $question,
+                    'answers'        => $question->answers,
+                    'difficulty'     => $material->difficulty,
+                    'student_answer' => $studentAnswer,
+                ]);
+            }
+
+            // [RULE-BASED] PEMBELAJARAN ADAPTIF
+            if ($materialTotal > 0) {
+                $pct = round(($materialCorrect / $materialTotal) * 100, 2);
+                if ($pct < 50) {
+                    // Beri tautan langsung agar siswa bisa klik file pdf/dokumen aslinya
+                    $docUrl = asset('storage/' . $material->material_path);
+                    $adaptiveFeedbacks[] = "Analisis Adaptif: Anda terindikasi sangat lemah pada pokok ujian (Skor hanya {$pct}%). Kami menyarankan Anda untuk meninjau secara mendalam materi yang diujikan pada referensi berikut: <a href=\"{$docUrl}\" target=\"_blank\" class=\"fw-bold text-decoration-underline text-dark\">Buka Dokumen Materi Terkait <i class=\"bi bi-box-arrow-up-right ms-1\"></i></a>";
+                }
+            }
+        }
+
+        return view('quiz.result', compact('lesson', 'overallScore', 'difficultyScores', 'questions', 'adaptiveFeedbacks'));
     }
 }

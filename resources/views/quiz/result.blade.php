@@ -88,6 +88,27 @@
         </div>
     </div>
 
+    {{-- PEMBELAJARAN ADAPTIF (RULE-BASED FEEDBACK) --}}
+    @if(isset($adaptiveFeedbacks) && count($adaptiveFeedbacks) > 0)
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm bg-warning bg-opacity-10 border-start border-warning border-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-lightbulb-fill text-warning fs-3 me-3"></i>
+                            <h5 class="fw-bold text-dark mb-0">Rekomendasi Pembelajaran Adaptif</h5>
+                        </div>
+                        <ul class="mb-0 fs-6">
+                            @foreach($adaptiveFeedbacks as $feedback)
+                                <li class="mb-2 text-dark">{!! $feedback !!}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{-- DETAIL JAWABAN TABS --}}
     <div class="card border-0 shadow-sm mb-5">
         <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">

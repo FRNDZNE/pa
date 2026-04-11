@@ -70,6 +70,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::post('lessons/{lesson}/generate-questions',[LessonController::class,'generate_questions'])->name('lessons.generate')->middleware(['auth', 'role:admin,lecturer']);
+Route::get('lessons/{lesson}/result',[LessonController::class,'result'])->name('lessons.result')->middleware(['auth', 'role:admin,lecturer']);
 Route::resource('lessons',LessonController::class)->only([
     'index','show','store','update','destroy'
 ])->middleware(['auth', 'role:admin,lecturer']);

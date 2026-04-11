@@ -111,8 +111,10 @@
                                             <td>{{ $l->lecturer->user->name }}</td>
                                         @endif
                                         <td>
-                                            <a href="{{ route('lessons.show', $l->uuid) }}" class="btn btn-info btn-md"><i
+                                            <a href="{{ route('lessons.show', $l->uuid) }}" class="btn btn-info btn-md" title="Lihat Soal"><i
                                                     class="bi bi-eye"></i></a>
+                                            <a href="{{ route('lessons.result', $l->uuid) }}" class="btn btn-success btn-md" title="Lihat Hasil Kuis"><i
+                                                    class="bi bi-bar-chart-fill"></i></a>
                                             {{-- Modal Edit --}}
                                             <!-- Modal trigger button -->
                                             <button type="button" class="btn btn-warning btn-md" data-bs-toggle="modal"

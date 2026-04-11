@@ -280,6 +280,21 @@ class LessonController extends Controller
             ], 500);
         }
     }
+
+    public function result(Lesson $lesson)
+    {
+        $students = \App\Models\Student::with([
+            'user',
+            'studentScore' => function($q) use ($lesson) {
+                $q->where('lesson_id', $lesson->id);
+            },
+            'studentDifficultyScores' => function($q) use ($lesson) {
+                $q->where('lesson_id', $lesson->id);
+            }
+        ])->get();
+
+        return view('lessons.result', compact('lesson', 'students'));
+    }
 }
 
 

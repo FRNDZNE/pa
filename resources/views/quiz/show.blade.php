@@ -68,9 +68,6 @@
                                         <div class="d-flex align-items-start mb-3">
                                             <div class="fw-bold me-2">{{ $index + 1 }}.</div>
                                             <div class="flex-grow-1">
-                                                <div class="mb-1">
-                                                    <span class="badge bg-secondary mb-2">{{ ucfirst($diff) }}</span>
-                                                </div>
                                                 <div class="question-text text-dark">
                                                     {!! $questionText !!}
                                                 </div>
